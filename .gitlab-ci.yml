@@ -1,0 +1,45 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: maven:latest
+  script:
+    - mvn clean package
+  tags:
+    - docker
+
+deploy_prod:
+  stage: deploy
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=poknotes-back-spring --api-key=$HEROKU_API_KEY
+  environment:
+    name: "prod"
+    url: "https://poknotes-back-spring.herokuapp.com"
+  only:
+    - main
+  when: manual
+  tags:
+    - docker
+
+deploy_staging:
+  stage: deploy
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=poknotes-back-spring-stg --api-key=$HEROKU_API_KEY
+  environment:
+    name: "staging"
+    url: "https://poknotes-back-spring-stg.herokuapp.com"
+  only:
+    - main
+  tags:
+    - docker
+
