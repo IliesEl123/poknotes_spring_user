@@ -1,7 +1,9 @@
 # Application de notes de poker - Partie Spring
 
 ## Description
-Cette partie du projet correspond à la partie serveur de l'application de notes de poker. Elle est développée en utilisant le framework Spring.
+Ce dépôt contient la partie du projet qui correspond à la partie serveur de l'application de notes de poker. Elle est développée en utilisant le framework Spring.
+
+La partie Angular : https://github.com/IliesEl123/poknotes_angular_ui
 
 ## Fonctionnalités
 
